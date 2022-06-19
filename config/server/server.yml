@@ -1,0 +1,13 @@
+server:
+    app:
+      name: business-services
+    grpc:
+      tls: false
+      host: localhost
+      port: 9903
+      timeout: 1500
+    usermanagement:
+      tls: false
+      host: localhost
+      port: 9902
+      timeout: 1500
