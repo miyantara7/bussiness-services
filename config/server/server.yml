@@ -4,7 +4,7 @@ server:
     grpc:
       tls: false
       host: localhost
-      port: 9903
+      port: 9901
       timeout: 1500
     usermanagement:
       tls: false

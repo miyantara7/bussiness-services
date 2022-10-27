@@ -8,9 +8,12 @@ import (
 	"os/signal"
 	"syscall"
 
-	client "github.com/vins7/bussiness-services/app/adapter/client/user_management"
+	client "github.com/vins7/bussiness-services/app/adapter/client/user_management_services"
 	conn "github.com/vins7/bussiness-services/app/infrastructure/connection/grpc"
+	svcUser "github.com/vins7/bussiness-services/app/service/user_management"
+	ucUser "github.com/vins7/bussiness-services/app/usecase/user_management"
 	cfg "github.com/vins7/bussiness-services/config"
+	bl "github.com/vins7/module-protos/app/interface/grpc/proto/bussiness"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -20,6 +23,7 @@ func RunServer() {
 	config := cfg.GetConfig()
 	grpcServer := grpc.NewServer()
 
+	Apply(grpcServer)
 	reflection.Register(grpcServer)
 
 	svcHost := config.Server.Grpc.Host
@@ -42,11 +46,8 @@ func RunServer() {
 	signal.Notify(c, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 	signal := <-c
 	log.Fatalf("process killed with signal: %v\n", signal.String())
-	u := client.NewUserManagementClient(conn.UserConn)
-	var a interface{}
-	u.Login(a)
 }
 
 func Apply(server *grpc.Server) {
-
+	bl.RegisterUsermanagementServiceServer(server, svcUser.NewUserManagementService(ucUser.NewUserManagementUsecase(client.NewUserManagementClient(conn.UserConn))))
 }

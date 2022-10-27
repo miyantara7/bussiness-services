@@ -1,6 +1,6 @@
 module github.com/vins7/bussiness-services
 
-// replace github.com/vins7/module-protos => ./../module-protos
+replace github.com/vins7/module-protos => ./../module-protos
 
 require (
 	github.com/vins7/module-protos v1.0.3
@@ -9,7 +9,6 @@ require (
 
 require (
 	github.com/fsnotify/fsnotify v1.5.4 // indirect
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.10.3 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/magiconair/properties v1.8.6 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect

@@ -7,5 +7,5 @@ import (
 )
 
 func BuildContext(client string) (ctx context.Context) {
-	return metadata.AppendToOutgoingContext(context.Background(), "clientname", client)
+	return metadata.AppendToOutgoingContext(context.Background(), "client-name", client)
 }
