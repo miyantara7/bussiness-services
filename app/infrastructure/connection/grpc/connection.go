@@ -22,7 +22,6 @@ func init() {
 	if err != nil {
 		log.Fatal("Not connected err =>", err)
 	}
-	fmt.Println("CONN : ", UserConn)
 }
 
 func OpenNewConnection(config cfgServer.Server) (*grpc.ClientConn, error) {
