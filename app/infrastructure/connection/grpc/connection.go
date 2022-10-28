@@ -3,7 +3,6 @@ package grpc
 import (
 	"context"
 	"fmt"
-	"log"
 	"time"
 
 	cfg "github.com/vins7/bussiness-services/config"
@@ -22,17 +21,17 @@ func init() {
 	config := cfg.GetConfig()
 	UserConn, err = OpenNewConnection(config.Server.UserManagement)
 	if err != nil {
-		log.Fatal("Not connected err =>", err)
+		fmt.Println("Not connected err =>", err.Error())
 	}
 
-	EMConn, err = OpenNewConnection(config.Server.UserManagement)
+	EMConn, err = OpenNewConnection(config.Server.EMoney)
 	if err != nil {
-		log.Fatal("Not connected err =>", err)
+		fmt.Println("Not connected err =>", err.Error())
 	}
 
-	TPConn, err = OpenNewConnection(config.Server.UserManagement)
+	TPConn, err = OpenNewConnection(config.Server.TopUP)
 	if err != nil {
-		log.Fatal("Not connected err =>", err)
+		fmt.Println("Not connected err =>", err.Error())
 	}
 }
 

@@ -39,7 +39,7 @@ func (e *EMoneyUsecase) ListBiller() (interface{}, error) {
 
 func (e *EMoneyUsecase) DetailBiller(ctx context.Context, in interface{}) (interface{}, error) {
 
-	var req *model.BillerRequest
+	var req *model.DetailUserReq
 	if err := mapstructure.Decode(in, &req); err != nil {
 		return nil, status.Errorf(codes.Internal, err.Error())
 	}
@@ -68,7 +68,7 @@ func (e *EMoneyUsecase) GetBalance(ctx context.Context, in interface{}) (interfa
 
 	req.UserId = md.UserID
 	req.UserName = md.UserName
-	res, err := e.repo.DetailBiller(req)
+	res, err := e.repo.GetBalance(req)
 	if err != nil {
 		return nil, err
 	}
