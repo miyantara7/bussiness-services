@@ -16,6 +16,14 @@ import (
 	bl "github.com/vins7/module-protos/app/interface/grpc/proto/bussiness"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
+
+	clientEM "github.com/vins7/bussiness-services/app/adapter/client/emoney_services"
+	svcEM "github.com/vins7/bussiness-services/app/service/e_money"
+	ucEM "github.com/vins7/bussiness-services/app/usecase/e_money"
+
+	clientTU "github.com/vins7/bussiness-services/app/adapter/client/top_up_services"
+	svcTU "github.com/vins7/bussiness-services/app/service/top_up"
+	ucTU "github.com/vins7/bussiness-services/app/usecase/top_up"
 )
 
 func RunServer() {
@@ -50,4 +58,6 @@ func RunServer() {
 
 func Apply(server *grpc.Server) {
 	bl.RegisterUsermanagementServiceServer(server, svcUser.NewUserManagementService(ucUser.NewUserManagementUsecase(client.NewUserManagementClient(conn.UserConn))))
+	bl.RegisterBillerServiceServer(server, svcEM.NewEMoneyService(ucEM.NewEMoneyUsecase(clientEM.NewEMoneyClient(conn.EMConn))))
+	bl.RegisterTopUpServicesServer(server, svcTU.NewTopUpService(ucTU.NewTopUpUsecase(clientTU.NewTopUpClient(conn.TPConn))))
 }

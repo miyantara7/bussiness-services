@@ -4,6 +4,8 @@ type ServerList struct {
 	App            App
 	Grpc           Server
 	UserManagement Server
+	EMoney         Server
+	TopUP          Server
 }
 
 type Server struct {

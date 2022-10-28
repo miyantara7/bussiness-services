@@ -13,12 +13,24 @@ import (
 
 var (
 	UserConn *grpc.ClientConn
+	EMConn   *grpc.ClientConn
+	TPConn   *grpc.ClientConn
 )
 
 func init() {
 	var err error
 	config := cfg.GetConfig()
 	UserConn, err = OpenNewConnection(config.Server.UserManagement)
+	if err != nil {
+		log.Fatal("Not connected err =>", err)
+	}
+
+	EMConn, err = OpenNewConnection(config.Server.UserManagement)
+	if err != nil {
+		log.Fatal("Not connected err =>", err)
+	}
+
+	TPConn, err = OpenNewConnection(config.Server.UserManagement)
 	if err != nil {
 		log.Fatal("Not connected err =>", err)
 	}
