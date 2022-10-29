@@ -1,4 +1,4 @@
-build: tidy
+build:
 	@echo "--- Building binary file ---"
 	@go build -o ./main server/grpc/main.go
 
@@ -8,3 +8,13 @@ grpc:
 
 tidy:
 	@go mod tidy
+
+setup:
+	@echo " --- Setup and generate configuration --- "
+	@cp config/example/server.yml.example config/server/server.yml
+
+build-docker: build
+	@docker build --tag bussiness-logic-services .
+
+protoc-docker: build
+	@docker container create --name bl-services -p 9901:9901 bussiness-logic-services

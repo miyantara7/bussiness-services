@@ -1,6 +1,4 @@
-FROM golang:latest
-
-#RUN apk update && apk add --no-cache git
+FROM golang:1.18
 
 WORKDIR /app
 
@@ -11,12 +9,8 @@ RUN go mod download
 
 COPY . .
 
-RUN go mod tidy
-
-#RUN make build
-
-RUN cd ./server/grpc && go build
+RUN make build
 
 EXPOSE 9901
 
-ENTRYPOINT ["./main"]
+CMD [ "./main" ]

@@ -39,7 +39,7 @@ func (e *EMoneyUsecase) ListBiller() (interface{}, error) {
 
 func (e *EMoneyUsecase) DetailBiller(ctx context.Context, in interface{}) (interface{}, error) {
 
-	var req *model.DetailUserReq
+	var req *model.BillerRequest
 	if err := mapstructure.Decode(in, &req); err != nil {
 		return nil, status.Errorf(codes.Internal, err.Error())
 	}
