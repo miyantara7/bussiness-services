@@ -1,4 +1,4 @@
-build:
+build: setup
 	@echo "--- Building binary file ---"
 	@go build -o ./main server/grpc/main.go
 
