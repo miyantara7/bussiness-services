@@ -1,6 +1,6 @@
 server:
     app:
-      name: business-services
+      name: business-logic-services
     grpc:
       tls: false
       host: localhost
