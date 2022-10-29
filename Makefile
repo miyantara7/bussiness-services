@@ -1,4 +1,4 @@
-build:
+build: setup
 	@echo "--- Building binary file ---"
 	@go build -o ./main server/grpc/main.go
 
@@ -16,5 +16,5 @@ setup:
 build-docker: build
 	@docker build --tag bussiness-logic-services .
 
-protoc-docker: build
+protoc-docker:
 	@docker container create --name bl-services -p 9901:9901 bussiness-logic-services
