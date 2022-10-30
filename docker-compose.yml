@@ -1,6 +1,16 @@
 version: "3.9"
 
 services:
+  mysql-services:
+    container_name: mysql-service
+    image: mysql
+    ports:
+      - 3306:3306
+    networks:
+      - app1_network
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    restart: unless-stopped
   user-management-services:
     container_name: user-management-services
     image: user-management-services
@@ -8,6 +18,17 @@ services:
       - 9902:9902
     networks:
       - app1_network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 20M
+        reservations:
+          cpus: '0.1'
+          memory: 20M
+    depends_on:
+      - mysql-services
+    restart: unless-stopped
   emoney-services:
     container_name: emoney-services
     image: emoney-services
@@ -15,6 +36,17 @@ services:
       - 9903:9903
     networks:
       - app1_network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 20M
+        reservations:
+          cpus: '0.1'
+          memory: 20M
+    depends_on:
+      - mysql-services
+    restart: unless-stopped
   top-up-services:
     container_name: top-up-services
     image: top-up-services
@@ -22,6 +54,17 @@ services:
       - 9904:9904
     networks:
       - app1_network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 20M
+        reservations:
+          cpus: '0.1'
+          memory: 20M
+    depends_on:
+      - mysql-services
+    restart: unless-stopped
   bussiness-logic-services:
     container_name: bl-services
     image: bussiness-logic-services
@@ -29,8 +72,16 @@ services:
       - 9901:9901
     networks:
       - app1_network
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 20M
+        reservations:
+          cpus: '0.1'
+          memory: 20M
+    restart: unless-stopped
+
 
 networks:
   app1_network:
