@@ -1,0 +1,94 @@
+version: "3.9"
+
+services:
+  mysql-services:
+    container_name: mysql-service
+    image: miyantara/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - app1_network
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    restart: unless-stopped
+  user-management-services:
+    container_name: user-management-services
+    image: miyantara/user-management-services
+    ports:
+      - 9902:9902
+    networks:
+      - app1_network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 20M
+        reservations:
+          cpus: '0.1'
+          memory: 20M
+    depends_on:
+      - mysql-services
+    restart: unless-stopped
+  emoney-services:
+    container_name: emoney-services
+    image: miyantara/emoney-services
+    ports:
+      - 9903:9903
+    networks:
+      - app1_network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 20M
+        reservations:
+          cpus: '0.1'
+          memory: 20M
+    depends_on:
+      - mysql-services
+    restart: unless-stopped
+  top-up-services:
+    container_name: top-up-services
+    image: miyantara/top-up-services
+    ports:
+      - 9904:9904
+    networks:
+      - app1_network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 20M
+        reservations:
+          cpus: '0.1'
+          memory: 20M
+    depends_on:
+      - mysql-services
+      - emoney-services
+    restart: unless-stopped
+  bussiness-services:
+    container_name: bussiness-services
+    image: miyantara/bussiness-services
+    ports:
+      - 9905:9905
+    networks:
+      - app1_network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 20M
+        reservations:
+          cpus: '0.1'
+          memory: 20M
+    restart: unless-stopped
+    depends_on:
+      - top-up-services
+      - user-management-services
+      - emoney-services
+
+
+networks:
+  app1_network:
+    name: app1_network
+  

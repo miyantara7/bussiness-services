@@ -1,23 +1,23 @@
 server:
     app:
-      name: business-logic-services
+      name: bussiness-services
     grpc:
       tls: false
-      host: localhost
-      port: 9901
+      host: bussiness-services
+      port: 9905
       timeout: 1500
     usermanagement:
       tls: false
-      host: localhost
+      host: user-management-services
       port: 9902
       timeout: 1500
     emoney:
       tls: false
-      host: localhost
+      host: emoney-services
       port: 9903
       timeout: 1500
     topup:
       tls: false
-      host: localhost
+      host: top-up-services
       port: 9904
       timeout: 1500
