@@ -1,10 +1,10 @@
 server:
     app:
-      name: business-logic-services
+      name: bussiness-services
     grpc:
       tls: false
-      host: localhost
-      port: 9901
+      host: bussiness-services
+      port: 9905
       timeout: 1500
     usermanagement:
       tls: false

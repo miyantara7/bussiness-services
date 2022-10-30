@@ -65,11 +65,11 @@ services:
     depends_on:
       - mysql-services
     restart: unless-stopped
-  bussiness-logic-services:
-    container_name: bl-services
-    image: bussiness-logic-services
+  bussiness-services:
+    container_name: bussiness-services
+    image: bussiness-services
     ports:
-      - 9901:9901
+      - 9905:9905
     networks:
       - app1_network
     deploy:

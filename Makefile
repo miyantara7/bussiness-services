@@ -14,7 +14,7 @@ setup:
 	@cp config/example/server.yml.example config/server/server.yml
 
 build-docker: build
-	@docker build --tag bussiness-logic-services .
+	@docker build --tag bussiness-services .
 
 protoc-docker:
-	@docker container create --name bl-services -p 9901:9901/tcp bussiness-logic-services
+	@docker container create --name bussiness-services -p 9905:9905 bussiness-services
