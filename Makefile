@@ -17,4 +17,4 @@ build-docker: build
 	@docker build --tag bussiness-logic-services .
 
 protoc-docker:
-	@docker container create --name bl-services -p 9901:9901 bussiness-logic-services
+	@docker container create --name bl-services -p 9901:9901/tcp bussiness-logic-services

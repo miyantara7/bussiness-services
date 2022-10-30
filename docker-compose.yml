@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  user-management-services:
+    container_name: user-management-services
+    image: user-management-services
+    ports:
+      - 9902:9902
+    networks:
+      - app1_network
+  emoney-services:
+    container_name: emoney-services
+    image: emoney-services
+    ports:
+      - 9903:9903
+    networks:
+      - app1_network
+  top-up-services:
+    container_name: top-up-services
+    image: top-up-services
+    ports:
+      - 9904:9904
+    networks:
+      - app1_network
+  bussiness-logic-services:
+    container_name: bl-services
+    image: bussiness-logic-services
+    ports:
+      - 9901:9901
+    networks:
+      - app1_network
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+
+networks:
+  app1_network:
+    name: app1_network
+  
